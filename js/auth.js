@@ -14,8 +14,8 @@ function goToRegister() {
 function login(e) {
   e.preventDefault();
   const dataRequest = {
-    email: logInFormEl[0],
-    password: logInFormEl[1],
+    email: logInFormEl[0].value,
+    password: logInFormEl[1].value,
   };
 
   fetch("../data.json", {
@@ -43,10 +43,10 @@ function login(e) {
 function register(e) {
   e.preventDefault();
   const dataRequest = {
-    firstName: registerFormEl[0],
-    email: registerFormEl[1],
-    password: registerFormEl[2],
-    password_confirmation: registerFormEl[3],
+    firstName: registerFormEl[0].value,
+    email: registerFormEl[1].value,
+    password: registerFormEl[2].value,
+    password_confirmation: registerFormEl[3].value,
   };
   fetch("../data.json", {
     headers: {
