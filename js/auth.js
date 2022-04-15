@@ -1,5 +1,7 @@
 const logInFormEl = document.querySelector(".login-form");
 const registerFormEl = document.querySelector(".register-form");
+const port = "http://127.0.0.1:4741/";
+//const port = "../data.json";
 
 function goToLogin() {
   logInFormEl.style.display = "block";
@@ -14,11 +16,13 @@ function goToRegister() {
 function login(e) {
   e.preventDefault();
   const dataRequest = {
-    email: logInFormEl[0].value,
-    password: logInFormEl[1].value,
+    credentials: {
+      email: logInFormEl[0].value,
+      password: logInFormEl[1].value,
+    },
   };
 
-  fetch("../data.json", {
+  fetch(port + "sign-in", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -43,12 +47,14 @@ function login(e) {
 function register(e) {
   e.preventDefault();
   const dataRequest = {
-    firstName: registerFormEl[0].value,
-    email: registerFormEl[1].value,
-    password: registerFormEl[2].value,
-    password_confirmation: registerFormEl[3].value,
+    credentials: {
+      firstName: registerFormEl[0].value,
+      email: registerFormEl[1].value,
+      password: registerFormEl[2].value,
+      password_confirmation: registerFormEl[3].value,
+    },
   };
-  fetch("../data.json", {
+  fetch(port + "sign-up", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
