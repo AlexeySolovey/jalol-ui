@@ -12,17 +12,60 @@ function goToRegister() {
 }
 
 function login(e) {
-  console.log(e);
   e.preventDefault();
-  fetch("../data.json")
+  const dataRequest = {
+    email: logInFormEl[0],
+    password: logInFormEl[1],
+  };
+
+  fetch("../data.json", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(dataRequest),
+  })
     .then((response) => {
       return response.json();
     })
     .then((data) => {
       console.log(data);
-      window.location.href = "order.html";
+      if (data.status === "success") {
+        localStorage.setItem("token", data.token);
+        window.location.href = "order.html";
+      } else {
+        alert(data.message);
+      }
     });
-  console.dir(logInFormEl[0].value);
 }
 
-function register() {}
+function register() {
+  e.preventDefault();
+  const dataRequest = {
+    firstName: registerFormEl[0],
+    email: registerFormEl[1],
+    password: registerFormEl[2],
+    password_confirmation: registerFormEl[3],
+  };
+  fetch("../data.json", {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(dataRequest),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      if (data.status === "success") {
+        localStorage.setItem("token", data.token);
+        window.location.href = "order.html";
+      } else {
+        alert(data.message);
+      }
+    });
+}
