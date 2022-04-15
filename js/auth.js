@@ -1,7 +1,5 @@
 const logInFormEl = document.querySelector(".login-form");
 const registerFormEl = document.querySelector(".register-form");
-const port = "http://127.0.0.1:4741/";
-//const port = "../data.json";
 
 function goToLogin() {
   logInFormEl.style.display = "block";
@@ -14,64 +12,17 @@ function goToRegister() {
 }
 
 function login(e) {
+  console.log(e);
   e.preventDefault();
-  const dataRequest = {
-    credentials: {
-      email: logInFormEl[0].value,
-      password: logInFormEl[1].value,
-    },
-  };
-
-  fetch(port + "sign-in", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify(dataRequest),
-  })
+  fetch("../data.json")
     .then((response) => {
       return response.json();
     })
     .then((data) => {
       console.log(data);
-      if (data.status === "success") {
-        localStorage.setItem("token", data.token);
-        window.location.href = "order.html";
-      } else {
-        alert(data.message);
-      }
+      window.location.href = "order.html";
     });
+  console.dir(logInFormEl[0].value);
 }
 
-function register(e) {
-  e.preventDefault();
-  const dataRequest = {
-    credentials: {
-      firstName: registerFormEl[0].value,
-      email: registerFormEl[1].value,
-      password: registerFormEl[2].value,
-      password_confirmation: registerFormEl[3].value,
-    },
-  };
-  fetch(port + "sign-up", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify(dataRequest),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      if (data.status === "success") {
-        localStorage.setItem("token", data.token);
-        window.location.href = "order.html";
-      } else {
-        alert(data.message);
-      }
-    });
-}
+function register() {}
