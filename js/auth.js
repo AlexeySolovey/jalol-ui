@@ -40,7 +40,7 @@ function login(e) {
     });
 }
 
-function register() {
+function register(e) {
   e.preventDefault();
   const dataRequest = {
     firstName: registerFormEl[0],
