@@ -104,6 +104,7 @@ function deleteItem(id){
         });
 }
 function openModal(id, date, text) {
+    debugger;
   modalPage.style.display = "block";
   commentEl.innerHTML = text;
   currentItem._id = id;

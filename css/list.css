@@ -4,7 +4,6 @@
 }
 .list-item {
     display: flex;
-    position: absolute;
     flex-direction: row;
     margin-bottom: 30px;
 }

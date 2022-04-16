@@ -3,7 +3,7 @@ const port = "https://hospital-service-express-api.herokuapp.com/";
 function checkUser() {
   const isToken = localStorage.getItem("token");
   if (!isToken) {
-    window.location.href = "/";
+    window.location.href = "index.html";
   }
 }
 checkUser();
@@ -24,7 +24,7 @@ function logOut() {
       if (data.status === "success") {
         alert(data.message);
         localStorage.removeItem("token");
-        window.location.href = "/";
+        window.location.href = "index.html";
       } else {
         alert(data.message);
       }
