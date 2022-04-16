@@ -5,18 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order</title>
+    <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/order.css">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="./order.html">enroll</a></li>
-                <li><a href="./list.html">order list</a></li>
-                <li><a href="#">exit</a></li>
-            </ul>
-        </nav>
-    </header>
+      <nav>
+          <ul>
+            <li><a href="./order.html">enroll</a></li>
+            <li><a href="./list.html">order list</a></li>
+            <li><a href="./change-pass.html">change password</a></li>
+            <li><a href="#" onclick="logOut()">exit</a></li>
+          </ul>
+      </nav>
+  </header>
     <section class="container">
         <form>
           <div class="inline-wrapper">
@@ -29,5 +31,6 @@
         </form>
       </section>
 </body>
+<script src="js/main.js"></script>
 <script src="js/order.js"></script>
 </html>
