@@ -1,6 +1,7 @@
 const logInFormEl = document.querySelector(".login-form");
 const registerFormEl = document.querySelector(".register-form");
-const port = "http://127.0.0.1:4741/";
+// const port = "http://127.0.0.1:4741/";
+const port = "https://hospital-service-express-api.herokuapp.com/";
 //const port = "../data.json";
 
 function goToLogin() {
