@@ -1,50 +1,119 @@
-const changeBtn = document.querySelector(".change-btn"),
-      cancelBtn = document.querySelector(".cancel-btn"),
-      list = document.querySelector(".list-wrapper"),
-      modalPage = document.querySelector(".change-modal"),
-      closeModalBtn = document.querySelector(".cancel-modal");
+const list = document.querySelector(".list-wrapper"),
+      modalPage = document.querySelector(".modal-wrapper"),
+      commentEl = document.querySelector('#comment');
 
-async function renderList(){
-  let response = await fetch("url");
-  let data = await response.json();
-  for(let key in data){
-    list.innerHTML += `
-        <div class="list-item">
-            <div class="text-content">
-              <p>Acceptance record for: <span class="enroll">${data[key].time}</span></p>
-              <p>Information: <span class="information">${data[key].comment}</span></p>
-            </div>
-            <div class="buttons">
-              <button class="change-btn">change</button>
-              <button class="cancel-btn">cancel</button>
-            </div>
-          </div>
-        `;
-  }
+let currentItem = {
+    _id: '',
+    date: null,
+    text: ''
 }
-function deleteItem(){
-    cancelBtn.addEventListener("click", ()=>{
-        dataArr.map((arrItem, index), ()=> {
-            dataArr.splice(index, 1);
-        })
+
+
+renderList();
+function renderList() {
+
+    fetch(port + "get-all-appointments", {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        method: "GET",
     })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            if (data.status === "success") {
+                for(let item of data.data){
+                    list.innerHTML += `
+                        <div class="list-item" id="list-item-${item._id}">
+                            <div class="text-content">
+                              <p>Acceptance record for: <span class="enroll">${item.date}</span></p>
+                              <p>Information: <span class="information">${item.text}</span></p>
+                            </div>
+                            <div class="buttons">
+                              <button class="change-btn" onclick="openModal('${item._id}', '${item.date}', '${item.text}')">change</button>
+                              <button class="cancel-btn" onclick="deleteItem('${item._id}')">cancel</button>
+                            </div>
+                          </div>
+                        `;
+                }
+            } else {
+                alert(data.message);
+            }
+        });
+
+
+
 }
-function openModal(){
-  changeBtn.addEventListener("click", ()=>{
-    if(modalPage.style.display != "block"){
-      modalPage.style.display = "block";
-      
-        // document.querySelector(".container").style.background = "rgba(0, 0, 0, 0.8)"
-      
-    }
-  })
+
+function updateItem() {
+    const dataRequest = {
+        date: Date.now(), // currentItem.date,
+        text: currentItem.text,
+    };
+
+    fetch(port + "update-appointment/" + currentItem._id, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        method: "PATCH",
+        body: JSON.stringify(dataRequest),
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            if (data.status === "success") {
+                alert(data.message);
+                const itemEl = document.getElementById("list-item-" + data.appointment._id);
+                closeModal();
+                itemEl.querySelector('.information').innerHTML = data.appointment.text;
+            } else {
+                alert(data.message);
+            }
+        });
+}
+
+
+
+
+function deleteItem(id){
+    fetch(port + "delete-appointment/" + id, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+        method: "DELETE",
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            if (data.status === "success") {
+                alert(data.message);
+                const itemEl = document.getElementById('list-item-' + id);
+                itemEl.remove();
+            } else {
+                alert(data.message);
+            }
+        });
+}
+function openModal(id, date, text) {
+  modalPage.style.display = "block";
+  commentEl.innerHTML = text;
+  currentItem._id = id;
 }
 function closeModal(){
-  closeModalBtn.addEventListener("click", ()=>{
     modalPage.style.display = "none";
-})
 }
-renderList();
-deleteItem();
-openModal();
-closeModal();
+
+function onChangeComment() {
+    currentItem.text = commentEl.value;
+}
+
+
