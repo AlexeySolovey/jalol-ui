@@ -17,7 +17,8 @@
             </ul>
         </nav>
     </header>
-    <section class="container">
+    <section class="container modal-wrapper">
+      <div class="shadow">
         <div class="list-wrapper">
           <div class="list-item">
             <div class="text-content">
@@ -29,56 +30,22 @@
               <button class="cancel-btn">cancel</button>
             </div>
           </div>
-  
-  
-          <div class="list-item">
-            <div class="text-content">
-              <p>Acceptance record for: <span class="enroll">11 a.m.</span></p>
-              <p>Information: <span class="information">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore, deserunt recusandae! Mollitia dolor perferendis autem, consequuntur magni quibusdam exercitationem animi eius magnam amet! Iste alias corrupti quia quae possimus voluptates.</span></p>
-            </div>
-            <div class="buttons">
-              <button class="change-btn">change</button>
-              <button class="cancel-btn">cancel</button>
-            </div>
-          </div>
-  
-  
-          <div class="list-item">
-            <div class="text-content">
-              <p>Acceptance record for: <span class="enroll">01 p.m.</span></p>
-              <p>Information: <span class="information"></span></p>
-            </div>
-            <div class="buttons">
-              <button class="change-btn">change</button>
-              <button class="cancel-btn">cancel</button>
-            </div>
-          </div>
-  
-  
-          <div class="list-item">
-            <div class="text-content">
-              <p>Acceptance record for: <span class="enroll">07 p.m.</span></p>
-              <p>Information: <span class="information"></span></p>
-            </div>
-            <div class="buttons">
-              <button class="change-btn">change</button>
-              <button class="cancel-btn">cancel</button>
-            </div>
-          </div>
-  
-  
-          <div class="list-item">
-            <div class="text-content">
-              <p>Acceptance record for: <span class="enroll">02 p.m.</span></p>
-              <p>Information: <span class="information">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium sed harum doloribus illo officiis? Sed non iusto provident quae dignissimos rem ex maiores laboriosam beatae repellendus. Quod mollitia alias laborum.</span></p>
-            </div>
-            <div class="buttons">
-              <button class="change-btn">change</button>
-              <button class="cancel-btn">cancel</button>
-            </div>
-          </div>
-        </div> 
+        </div>
+        </div>
+        
       </section>
+      <div class="change-modal">
+        <!-- <form> -->
+          <div class="inline-wrapper">
+            <h2 class="date">Enter time</h2>
+            <select name="time" id="timepicker"></select>
+            <input type="date" name="date" id="date-input" />
+          </div>
+          <textarea name="comment" id="comment"></textarea>
+          <button class="enroll-btn">Make an appointment</button>
+          <button class="cancel-modal">Cancel</button>
+        <!-- </form> -->
+      </div> 
 </body>
 <script src="js/list.js"></script>
 </html>

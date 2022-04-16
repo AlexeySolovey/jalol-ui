@@ -1,6 +1,8 @@
 const changeBtn = document.querySelector(".change-btn"),
       cancelBtn = document.querySelector(".cancel-btn"),
-      list = document.querySelector(".list-wrapper");
+      list = document.querySelector(".list-wrapper"),
+      modalPage = document.querySelector(".change-modal"),
+      closeModalBtn = document.querySelector(".cancel-modal");
 
 async function renderList(){
   let response = await fetch("url");
@@ -27,5 +29,22 @@ function deleteItem(){
         })
     })
 }
+function openModal(){
+  changeBtn.addEventListener("click", ()=>{
+    if(modalPage.style.display != "block"){
+      modalPage.style.display = "block";
+      
+        // document.querySelector(".container").style.background = "rgba(0, 0, 0, 0.8)"
+      
+    }
+  })
+}
+function closeModal(){
+  closeModalBtn.addEventListener("click", ()=>{
+    modalPage.style.display = "none";
+})
+}
 renderList();
 deleteItem();
+openModal();
+closeModal();
