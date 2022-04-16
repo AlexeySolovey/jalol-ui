@@ -29,7 +29,7 @@ nav li a:hover {
     max-width: 1150px;
     width: 100%;
 }
-form {
+.form-wrapper {
     padding-top: 70px;
 }
 .date {
@@ -70,7 +70,7 @@ form {
 #comment {
     display: block;
     width: 650px;
-    height: 400px;
+    height: 200px;
     margin: 50px 0;
     resize: none;
     padding: 20px;
