@@ -1,7 +1,6 @@
 const logInFormEl = document.querySelector(".login-form");
 const registerFormEl = document.querySelector(".register-form");
 const port = "https://hospital-service-express-api.herokuapp.com/";
-
 function goToLogin() {
   logInFormEl.style.display = "block";
   registerFormEl.style.display = "none";

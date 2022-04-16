@@ -1,47 +1,51 @@
 const timeArr = [
-  "12 a.m.",
-  "01 a.m.",
-  "02 a.m.",
-  "03 a.m.",
-  "04 a.m.",
-  "05 a.m.",
-  "06 a.m.",
-  "07 a.m.",
-  "08 a.m.",
-  "09 a.m.",
-  "10 a.m.",
-  "11 a.m.",
-  "12 p.m.",
-  "01 p.m.",
-  "02 p.m.",
-  "03 p.m.",
-  "04 p.m.",
-  "05 p.m.",
-  "06 p.m.",
-  "07 p.m.",
-  "08 p.m.",
-  "09 p.m.",
-  "10 p.m.",
-  "11 p.m.",
+  {time: "12 a.m.", ms: 0},
+  {time: "01 a.m.", ms: 3600000},
+  {time: "02 a.m.", ms: 7200000},
+  {time: "03 a.m.", ms: 10800000},
+  {time: "04 a.m.", ms: 14400000},
+  {time: "05 a.m.", ms: 18000000},
+  {time: "06 a.m.", ms: 21600000},
+  {time: "07 a.m.", ms: 25200000},
+  {time: "08 a.m.", ms: 28800000},
+  {time: "09 a.m.", ms: 32400000},
+  {time: "10 a.m.", ms: 36000000},
+  {time: "11 a.m.", ms: 39600000},
+  {time: "12 p.m.", ms: 43200000},
+  {time: "01 p.m.", ms: 46800000},
+  {time: "02 p.m.", ms: 50400000},
+  {time: "03 p.m.", ms: 54000000},
+  {time: "04 p.m.", ms: 57600000},
+  {time: "05 p.m.", ms: 61200000},
+  {time: "06 p.m.", ms: 64800000},
+  {time: "07 p.m.", ms: 68400000},
+  {time: "08 p.m.", ms: 72000000},
+  {time: "09 p.m.", ms: 75600000},
+  {time: "10 p.m.", ms: 79200000},
+  {time: "11 p.m.", ms: 82800000},
 ];
 const timePicker = document.querySelector("#timepicker"),
   dateInput = document.querySelector("#date-input"),
   comment = document.querySelector("#comment"),
   enrollBtn = document.querySelector(".enroll-btn");
-let dataArr = [];
-timeArr.forEach((time) => {
-  timePicker.innerHTML += `<option value="${time}">${time}</option>`;
+dateInput.valueAsDate = new Date();
+timeArr.forEach((checkedTime) => {
+  timePicker.innerHTML += `<option value="${checkedTime.time}">${checkedTime.time}</option>`;
 });
 
 const form = document.querySelector("form");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-
+  console.log(dateInput.value);
+  let fullCheckedTime;
+  timeArr.forEach((checkedTime) => {
+    fullCheckedTime = dateInput.valueAsNumber + checkedTime.ms;
+  });
   const dataRequest = {
-    date: 165011200669, // должна быть дата в миллисекундах
+    date: fullCheckedTime, // должна быть дата в миллисекундах
     text: comment.value,
   };
-
+  console.log(dataRequest);
   fetch(port + "create-appointment", {
     headers: {
       Accept: "application/json",
